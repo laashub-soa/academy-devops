@@ -1,0 +1,21 @@
+127.0.0.1 localhost
+127.0.0.1 training-cluster
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+172.18.0.2 node-1.cluster  # clusterdock
+172.18.0.3 node-2.cluster  # clusterdock
+172.18.0.4 node-3.cluster  # clusterdock
+172.18.0.5 node-4.cluster  # clusterdock
+172.18.0.6 kdc.cluster  # clusterdock
+172.18.0.7 openldap.cluster
+172.18.0.8 oracle.cluster
+172.18.0.9 mysql.cluster
+172.18.0.10 influx.cluster
+172.18.0.11 postgres-96-wal2json_db_1.cluster
+172.18.0.12 sch313.cluster

@@ -33,7 +33,7 @@ docker start sch313
 sleep 10
 docker exec -it gifted_goldberg service kadmin start
 docker exec -it gifted_goldberg service krb5kdc start
-docker start st313
+#docker start st313
 sleep 10
 docker exec -it festive_jones service transformer start
 docker exec -it nifty_hamilton service transformer start

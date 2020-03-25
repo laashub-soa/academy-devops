@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker stop sch313
+docker stop sch315
 docker stop postgres-96-wal2json_db_1
 docker stop influx
 docker stop mysql

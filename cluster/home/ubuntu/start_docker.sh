@@ -31,13 +31,13 @@ docker start influx
 docker start postgres-96-wal2json_db_1
 docker start sch315
 sleep 10
-docker exec -it gifted_goldberg service kadmin start
-docker exec -it gifted_goldberg service krb5kdc start
+docker exec gifted_goldberg service kadmin start
+docker exec gifted_goldberg service krb5kdc start
 #docker start st313
 sleep 10
-docker exec -it festive_jones service transformer start
-docker exec -it nifty_hamilton service transformer start
-docker exec -it heuristic_sinoussi service transformer start
+docker exec festive_jones service transformer start
+docker exec nifty_hamilton service transformer start
+docker exec heuristic_sinoussi service transformer start
 
 # delete existing temp user accounts
 for i in `sudo cat /etc/passwd`

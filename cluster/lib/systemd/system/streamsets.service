@@ -1,5 +1,7 @@
 [Unit]
 Description=updates local git repo and starts the StreamSets Docker containers
+Requisite=docker.service
+After=docker.service
 
 [Service]
 Type=simple

@@ -56,6 +56,6 @@ USERID=$CUSTOMER'-user'$((1 + $RANDOM % 100))
 PASSWD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
 sudo useradd -G docker -m -s /bin/bash $USERID
 echo $USERID:$PASSWD | sudo chpasswd
-echo "Created user $USERID with password: $PASSWD" >> /home/ubuntu/temp_user_creds.txt
+echo "Created user $USERID with password: $PASSWD"
 
 exit 0

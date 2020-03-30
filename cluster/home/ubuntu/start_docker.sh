@@ -44,19 +44,21 @@ docker exec nifty_hamilton service transformer start
 docker exec heuristic_sinoussi service transformer start
 
 # delete existing temp user accounts
+echo "Deleting old temp accounts..."
 for i in `sudo cat /etc/passwd`
 do
   TEMPUSER=$(echo $i | cut -d':' -f 1)
   SUBSTR='-user'
   if [ -z "${TEMPUSER##*$SUBSTR*}" ]; then
+    echo "Deleting user: $TEMPUSER"
     sudo userdel $TEMPUSER
-    rm -f /home/ubuntu/temp_user_creds.txt
   fi
 done
 
 # create new temp user account
 RANDOM=$$
 USERID=$CUSTOMER'-user'$((1 + $RANDOM % 100))
+echo "Creating new user $USERID..."
 PASSWD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
 sudo useradd -G docker -m -s /bin/bash $USERID
 echo $USERID:$PASSWD | sudo chpasswd

@@ -1,4 +1,6 @@
 #!/bin/bash
+exec 1>/home/ubuntu/streamsets_service_startup.log
+exec 2>&1
 
 echo "Starting StreamSets service..."
 

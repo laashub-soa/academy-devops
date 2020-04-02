@@ -1,7 +1,7 @@
 import sys
 from cm_api.api_client import ApiResource
 
-cm_host = "node-1.cluster"
+cm_host = "172.18.0.2"
 cm_port = "7180"
 cm_login = "admin"
 cm_password = "admin"

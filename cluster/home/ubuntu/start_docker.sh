@@ -47,13 +47,12 @@ docker exec gifted_goldberg service krb5kdc start
 # Start Transformer instances after fixing hostname setting on node-3
 sleep 10
 #docker start st313
-if [[ $EC2_PUBLIC_HOSTNAME == *"training-"* ]]; then
-  NODE-3_TRANSFORMER_HOST=$EC2_PUBLIC_HOSTNAME
-else
-  NODE-3_TRANSFORMER_HOST=$EC2_PUBLIC_IP
-fi
-echo "setting node-3 transformer host property: $NODE-3_TRANSFORMER_HOST"
-docker exec nifty_hamilton sed -i "s#replaceme#$NODE-3_TRANSFORMER_HOST#g" /etc/transformer/transformer.properties
+#if [[ $EC2_PUBLIC_HOSTNAME == *"training-"* ]]; then
+#  NODE_3_TRANSFORMER_HOST=$EC2_PUBLIC_HOSTNAME
+#else
+#  NODE_3_TRANSFORMER_HOST=$EC2_PUBLIC_IP
+#fi
+docker exec nifty_hamilton sed -i "s#replaceme#$EC2_PUBLIC_IP#g" /etc/transformer/transformer.properties
 
 docker exec festive_jones service transformer start
 docker exec nifty_hamilton service transformer start
@@ -61,6 +60,7 @@ docker exec heuristic_sinoussi service transformer start
 
 # Restart Cloudera cluster
 python restart_cm_hosts.py
+sleep 10
 docker exec laughing_stonebraker service cloudera-scm-server restart
 
 # delete existing temp user accounts

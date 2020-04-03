@@ -58,11 +58,6 @@ docker exec festive_jones service transformer start
 docker exec nifty_hamilton service transformer start
 docker exec heuristic_sinoussi service transformer start
 
-# Restart Cloudera cluster
-python restart_cm_hosts.py
-sleep 10
-docker exec laughing_stonebraker service cloudera-scm-server restart
-
 # delete existing temp user accounts
 echo "Deleting old temp accounts..."
 for i in `sudo cat /etc/passwd`
@@ -76,13 +71,16 @@ do
 done
 
 # create new temp user account
-RANDOM=$$
-USERID=$CUSTOMER'-user'$((1 + $RANDOM % 100))
-echo "Creating new user $USERID..."
-PASSWD=$((cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1))
-echo "password: $PASSWD"
-sudo useradd -aG docker -m -s /bin/bash $USERID
-echo $USERID:$PASSWD | sudo chpasswd
-echo "Created user $USERID with password: $PASSWD"
+#RANDOM=$$
+#USERID=$CUSTOMER'-user'$((1 + $RANDOM % 100))
+#PASSWD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
+#sudo useradd -G docker -m -s /bin/bash $USERID
+#paste -d : <($USERID) <($PASSWD) | tee secrets.txt | sudo chpasswd
+#echo "Created user $USERID with password: $PASSWD"
+
+sleep 30
+python ~ubuntu/restart_cm_hosts.py
+sleep 30
+docker exec laughing_stonebraker service cloudera-scm-server restart
 
 exit 0

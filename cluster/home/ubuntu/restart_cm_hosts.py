@@ -10,11 +10,20 @@ cm_api_version = "19"
 
 api = ApiResource(server_host=cm_host, server_port=cm_port, username=cm_login, password=cm_password, version=cm_api_version)
 
-cluster = api.get_cluster(cluster_name)
+for attempt in range(1,30):
+    try:
+        print "Getting cluster on attempt ",attempt
+        cluster = api.get_cluster(cluster_name)
+        print "Got cluster!"
+        break;
+    except Exception as e:
+        print "Waiting 10 seconds. Will try up to 30 times"
+        time.sleep(10)
+        pass
+
 hosts = cluster.list_hosts()
 
 for s in cluster.get_all_services():
   print "Restarting roles for services ",s.name
   for r in s.get_all_roles():
     s.restart_roles(r.name)
-

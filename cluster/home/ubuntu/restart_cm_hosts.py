@@ -28,3 +28,5 @@ for s in cluster.get_all_services():
   print "Restarting roles for services ",s.name
   for r in s.get_all_roles():
     s.restart_roles(r.name)
+
+print "Done restarting roles"

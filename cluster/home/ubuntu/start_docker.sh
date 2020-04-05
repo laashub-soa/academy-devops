@@ -46,40 +46,13 @@ docker exec gifted_goldberg service krb5kdc start
 
 # Start Transformer instances after fixing hostname setting on node-3
 sleep 10
-#docker start st313
-#if [[ $EC2_PUBLIC_HOSTNAME == *"training-"* ]]; then
-#  NODE_3_TRANSFORMER_HOST=$EC2_PUBLIC_HOSTNAME
-#else
-#  NODE_3_TRANSFORMER_HOST=$EC2_PUBLIC_IP
-#fi
 docker exec nifty_hamilton sed -i "s#replaceme#$EC2_PUBLIC_IP#g" /etc/transformer/transformer.properties
 
 docker exec festive_jones service transformer start
 docker exec nifty_hamilton service transformer start
 docker exec heuristic_sinoussi service transformer start
 
-# delete existing temp user accounts
-echo "Deleting old temp accounts..."
-for i in `sudo cat /etc/passwd`
-do
-  TEMPUSER=$(echo $i | cut -d':' -f 1)
-  SUBSTR='-user'
-  if [ -z "${TEMPUSER##*$SUBSTR*}" ]; then
-    echo "Deleting user: $TEMPUSER"
-    sudo userdel $TEMPUSER
-  fi
-done
-
-# create new temp user account
-#RANDOM=$$
-#USERID=$CUSTOMER'-user'$((1 + $RANDOM % 100))
-#PASSWD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
-#sudo useradd -G docker -m -s /bin/bash $USERID
-#paste -d : <($USERID) <($PASSWD) | tee secrets.txt | sudo chpasswd
-#echo "Created user $USERID with password: $PASSWD"
 
 python ~ubuntu/restart_cm_hosts.py
-sleep 30
-docker exec laughing_stonebraker service cloudera-scm-server restart
 
 exit 0

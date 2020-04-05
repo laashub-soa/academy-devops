@@ -78,7 +78,6 @@ done
 #paste -d : <($USERID) <($PASSWD) | tee secrets.txt | sudo chpasswd
 #echo "Created user $USERID with password: $PASSWD"
 
-sleep 120
 python ~ubuntu/restart_cm_hosts.py
 sleep 30
 docker exec laughing_stonebraker service cloudera-scm-server restart

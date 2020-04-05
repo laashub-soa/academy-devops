@@ -12,7 +12,7 @@ api = ApiResource(server_host=cm_host, server_port=cm_port, username=cm_login, p
 
 for attempt in range(1,30):
     try:
-        print "Getting cluster on attempt ",attempt
+        print "Getting cluster on attempt no. ",attempt
         cluster = api.get_cluster(cluster_name)
         print "Got cluster!"
         break;

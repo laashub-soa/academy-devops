@@ -19,6 +19,7 @@ for attempt in range(1,30):
         break;
     except Exception as e:
         print "Waiting 10 seconds. Will try up to 30 times"
+        sys.stdout.flush()
         time.sleep(10)
         pass
 
@@ -26,6 +27,7 @@ hosts = cluster.list_hosts()
 
 for s in cluster.get_all_services():
   print "Restarting roles for services ",s.name
+  sys.stdout.flush()
   for r in s.get_all_roles():
     s.restart_roles(r.name)
 

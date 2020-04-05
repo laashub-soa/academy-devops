@@ -1,4 +1,5 @@
 import sys
+import time
 from cm_api.api_client import ApiResource
 
 cm_host = "172.18.0.2"
